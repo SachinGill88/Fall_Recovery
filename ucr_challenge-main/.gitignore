@@ -1,0 +1,32 @@
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE files
+.idea/
+.vscode/
+
+# Local development settings
+.env
+.env.local
+
+# Test cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+
+# README files
+README.md
+fall_recovery.md 
