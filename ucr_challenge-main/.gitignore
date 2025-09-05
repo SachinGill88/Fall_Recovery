@@ -12,6 +12,7 @@ build/
 venv/
 env/
 ENV/
+.UCRvenv/
 
 # IDE files
 .idea/
