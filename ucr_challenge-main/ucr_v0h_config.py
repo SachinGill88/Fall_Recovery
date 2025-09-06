@@ -1,7 +1,7 @@
 """
 UCR v0H Humanoid Robot Specific Configuration
 Get specific positions for robot joints and fallen poses
-based on analysis of the UCR v0H MJCF XML model.
+based on analysis of the UCR v0H MJCF XML model
 """
 
 import numpy as np
