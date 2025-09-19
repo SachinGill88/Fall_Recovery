@@ -167,36 +167,36 @@ class UCRTrainer:
         
         # Stage-specific hyperparameters
         if stage == "stage1":
-            # Stage 1: More exploration, less regularization
+            # Stage 1: Optimized for GPU's power
             hyperparams = {
                 "learning_rate": self.config.get("stage1_lr", 3e-4),
-                "n_steps": 2048,
-                "batch_size": 64,
-                "n_epochs": 10,
+                "n_steps": 4096,      # Increased from 2048 - more data per update
+                "batch_size": 512,    # Much larger - H100 can handle this easily
+                "n_epochs": 8,        # Reduced since larger batches are more stable
                 "gamma": 0.99,
                 "gae_lambda": 0.95,
                 "clip_range": 0.2,
-                "ent_coef": 0.01,  # Higher entropy for exploration
+                "ent_coef": 0.01,
                 "vf_coef": 0.5,
                 "max_grad_norm": 0.5,
                 "target_kl": 0.02
             }
         else:  # stage2
-            # Stage 2: Less exploration, more stable learning
+            # Stage 2: Even more aggressive for GPU
             hyperparams = {
                 "learning_rate": self.config.get("stage2_lr", 1e-4),
-                "n_steps": 2048,
-                "batch_size": 128,
-                "n_epochs": 20,
-                "gamma": 0.995,  # Slightly higher gamma for long-term rewards
+                "n_steps": 4096,      # Increased from 2048
+                "batch_size": 1024,   # Very large - GPU exclusive territory
+                "n_epochs": 15,       # Reduced from 20 due to larger batches
+                "gamma": 0.995,
                 "gae_lambda": 0.98,
-                "clip_range": 0.15,  # Tighter clipping
-                "ent_coef": 0.005,   # Lower entropy
+                "clip_range": 0.15,
+                "ent_coef": 0.005,
                 "vf_coef": 0.5,
                 "max_grad_norm": 0.3,
                 "target_kl": 0.015
             }
-        
+                
         device = self.config.get("device", "cpu")
         if device == "auto":
             device = "cuda" if torch.cuda.is_available() else "cpu" ## GPU training 
@@ -500,7 +500,7 @@ def main():
     
     # Override with any custom settings
     custom_overrides = {
-        "n_envs": 4,  # Changed for runpod run - usually set to 4 for CPU
+        "n_envs": 12,  # Changed for runpod run - usually set to 4 for CPU
         "use_wandb": True,  # Enable for experiment tracking
         "device": "cuda" if torch.cuda.is_available() else "cpu",
     }
