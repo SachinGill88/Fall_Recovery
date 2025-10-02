@@ -1,0 +1,36 @@
+{
+  "model_path": "model/mjcf/xml/v0H_pos.xml",
+  "max_episode_steps": "500",
+  "randomize_terrain": "False",
+  "control_frequency": "50",
+  "standing_height": "0.95",
+  "target_height_threshold": "0.76",
+  "stability_threshold": "0.5",
+  "upright_threshold": "0.9",
+  "algorithm": "PPO",
+  "n_envs": "4",
+  "device": "cpu",
+  "seed": "42",
+  "gamma": "0.99",
+  "use_wandb": "True",
+  "log_freq": "1000",
+  "eval_freq": "50000",
+  "save_freq": "100000",
+  "stage1_timesteps": "2000000",
+  "stage1_lr": "0.0003",
+  "stage1_reward_threshold": "200",
+  "reward_weights": {
+    "upright": 15.0,
+    "height": 10.0,
+    "stability": 3.0,
+    "progress": 5.0,
+    "energy": -0.05,
+    "contact": -0.02,
+    "joint_limits": -0.1
+  },
+  "exploration": {
+    "entropy_coef": 0.01,
+    "clip_range": 0.2,
+    "n_epochs": 10
+  }
+}
